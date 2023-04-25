@@ -1950,11 +1950,7 @@ int exanic_netdev_alloc(struct exanic *exanic, unsigned port,
 
     err = exanic_get_mac_addr_regs(exanic, port, mac_addr);
     if (!err)
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 17, 0)
-        eth_hw_addr_set(ndev, mac_addr);
-#else
         memcpy(ndev->dev_addr, mac_addr, ETH_ALEN);
-#endif
 
     memcpy(ndev->perm_addr, exanic->port[port].orig_mac_addr, ETH_ALEN);
 
